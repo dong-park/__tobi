@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,10 @@ import java.io.IOException;
 public class HellobootApplication {
 
     public static void main(String[] args) {
+        GenericApplicationContext context = new GenericApplicationContext();
+        context.registerBean("helloController", HelloController.class);
+        context.refresh();
+
         // embedded tomcat server
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         WebServer webServer = factory.getWebServer(
@@ -33,20 +38,13 @@ public class HellobootApplication {
 
                                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                                         String name = req.getParameter("name");
+                                        HelloController helloController = context.getBean("helloController", HelloController.class);
+                                        helloController.hello(name);
 
-                                        HelloController helloController = new HelloController(name);
-
-                                        resp.setStatus(HttpStatus.OK.value());
-                                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                                        resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
                                         resp.getWriter().println(helloController);
-                                    } else if (req.getRequestURI().equals("/user")) {
-                                        resp.setStatus(HttpStatus.OK.value());
-                                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                                        resp.getWriter().println("user");
                                     } else {
                                         resp.setStatus(HttpStatus.NOT_FOUND.value());
-                                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                                        resp.getWriter().println("404 Not Found");
                                     }
 
                                 }
