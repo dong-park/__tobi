@@ -21,6 +21,8 @@ public class HellobootApplication {
     public static void main(String[] args) {
         GenericApplicationContext context = new GenericApplicationContext();
         context.registerBean("helloController", HelloController.class);
+        context.registerBean("helloService", SimpleHelloService.class); /// helloController.helloService is constructor injected with SimpleHelloService with no qualifier
+
         context.refresh();
 
         // embedded tomcat server
