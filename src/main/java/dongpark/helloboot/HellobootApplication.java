@@ -12,6 +12,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.context.support.GenericWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import java.io.IOException;
 
@@ -19,7 +21,7 @@ import java.io.IOException;
 public class HellobootApplication {
 
     public static void main(String[] args) {
-        GenericApplicationContext context = new GenericApplicationContext();
+        GenericWebApplicationContext context = new GenericWebApplicationContext();
         context.registerBean("helloController", HelloController.class);
         context.registerBean("helloService", SimpleHelloService.class); /// helloController.helloService is constructor injected with SimpleHelloService with no qualifier
 
@@ -32,25 +34,8 @@ public class HellobootApplication {
                 // functional interface to lambda
                 servletContext -> {
                     servletContext.addServlet(
-                            // servlet container add servlet
-                            "frontcontroller", new HttpServlet() {
-                                @Override
-                                protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                                    // auth, security, logging, ...
-
-                                    if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
-                                        String name = req.getParameter("name");
-                                        HelloController helloController = context.getBean("helloController", HelloController.class);
-
-                                        resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
-                                        resp.getWriter().println(helloController.hello(name));
-                                    } else {
-                                        resp.setStatus(HttpStatus.NOT_FOUND.value());
-                                    }
-
-                                }
-//                            }).addMapping("/hello");
-                            }).addMapping("/*"); // front controller
+                            "dispatcherServlet", new DispatcherServlet(context)) // dispatcher servlet: front controller of spring mvc
+                            .addMapping("/*"); // front controller
                 }
         );
         webServer.start();
