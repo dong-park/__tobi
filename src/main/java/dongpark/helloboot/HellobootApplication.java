@@ -18,7 +18,7 @@ import java.io.IOException;
 public class HellobootApplication {
 
     public static void main(String[] args) {
-        // tomcat server start
+        // embedded tomcat server
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         WebServer webServer = factory.getWebServer(
                 // servlet container init
@@ -33,9 +33,12 @@ public class HellobootApplication {
 
                                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                                         String name = req.getParameter("name");
+
+                                        HelloController helloController = new HelloController(name);
+
                                         resp.setStatus(HttpStatus.OK.value());
                                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                                        resp.getWriter().println("Hello, Spring Boot! " + name);
+                                        resp.getWriter().println(helloController);
                                     } else if (req.getRequestURI().equals("/user")) {
                                         resp.setStatus(HttpStatus.OK.value());
                                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
@@ -54,5 +57,4 @@ public class HellobootApplication {
         webServer.start();
 
     }
-
 }

@@ -1,14 +1,15 @@
 package dongpark.helloboot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
 public class HelloController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, Spring Boot!";
+    private String name;
+
+    public HelloController(String name) {
+        this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Hello, Spring Boot! " + name;
+    }
 }
