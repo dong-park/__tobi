@@ -1,19 +1,11 @@
 package dongpark.helloboot;
 
+import java.util.Objects;
+
 public class HelloController {
 
-    private String name;
-
-    public HelloController() {
-        this.name = "";
-    }
-
-    @Override
-    public String toString() {
-        return "Hello, Spring Boot! " + name;
-    }
-
-    public void hello(String name) {
-        this.name = name;
+    public String hello(String name) {
+        SimpleHelloService simpleHelloService = new SimpleHelloService();
+        return simpleHelloService.sayHello(Objects.requireNonNull(name));
     }
 }

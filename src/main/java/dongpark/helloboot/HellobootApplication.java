@@ -39,10 +39,9 @@ public class HellobootApplication {
                                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                                         String name = req.getParameter("name");
                                         HelloController helloController = context.getBean("helloController", HelloController.class);
-                                        helloController.hello(name);
 
                                         resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
-                                        resp.getWriter().println(helloController);
+                                        resp.getWriter().println(helloController.hello(name));
                                     } else {
                                         resp.setStatus(HttpStatus.NOT_FOUND.value());
                                     }
