@@ -21,24 +21,28 @@ import java.io.IOException;
 public class HellobootApplication {
 
     public static void main(String[] args) {
-        GenericWebApplicationContext context = new GenericWebApplicationContext();
+        GenericWebApplicationContext context = new GenericWebApplicationContext() {
+            @Override
+            protected void onRefresh() {
+                super.onRefresh();
+
+                // web application context가 refresh되면, servlet container를 생성하고, servlet container에 servlet을 추가한다.
+                // embedded tomcat server
+                TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+                WebServer webServer = factory.getWebServer(
+                        // servlet container init
+                        // functional interface to lambda
+                        servletContext -> {
+                            servletContext.addServlet(
+                                            "dispatcherServlet", new DispatcherServlet(this)) // dispatcher servlet: front controller of spring mvc
+                                    .addMapping("/*"); // front controller
+                        }
+                );
+                webServer.start();
+            }
+        };
         context.registerBean("helloController", HelloController.class);
         context.registerBean("helloService", SimpleHelloService.class); /// helloController.helloService is constructor injected with SimpleHelloService with no qualifier
-
         context.refresh();
-
-        // embedded tomcat server
-        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-        WebServer webServer = factory.getWebServer(
-                // servlet container init
-                // functional interface to lambda
-                servletContext -> {
-                    servletContext.addServlet(
-                            "dispatcherServlet", new DispatcherServlet(context)) // dispatcher servlet: front controller of spring mvc
-                            .addMapping("/*"); // front controller
-                }
-        );
-        webServer.start();
-
     }
 }
