@@ -2,6 +2,7 @@ package dongpark.helloboot;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class HelloController {
 
     @GetMapping
     // @ResponseBody // 이걸 붙이면, return 값이 response body로 처리된다.
-    public String hello(String name) {
+    public String hello(@RequestParam(value = "name") String name) {
         return helloService.sayHello(Objects.requireNonNull(name));
     }
 }
