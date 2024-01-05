@@ -26,7 +26,8 @@ public class HellobootApplication {
             protected void onRefresh() {
                 super.onRefresh();
 
-                // web application context가 refresh되면, servlet container를 생성하고, servlet container에 servlet을 추가한다.
+                // 스프링 컨테이너에web application context가 refresh되면
+                // servlet container를 생성하고, servlet container에 servlet을 추가한다.
                 // embedded tomcat server
                 TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
                 WebServer webServer = factory.getWebServer(
