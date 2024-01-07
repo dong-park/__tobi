@@ -32,7 +32,7 @@ public class HelloApiTest {
         // header 확인 content-type text/plain
         Assertions.assertThat(response.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
         // body 확인
-        Assertions.assertThat(response.getBody()).isEqualTo("Hello, dongpark");
+        Assertions.assertThat(response.getBody()).isEqualTo("*Hello, dongpark*");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class HelloApiTest {
         ResponseEntity<String> response =
                 rest.getForEntity("http://localhost:8080/hello", String.class, "");
         // status code 확인
-        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
