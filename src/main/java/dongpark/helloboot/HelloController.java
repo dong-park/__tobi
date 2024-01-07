@@ -18,6 +18,11 @@ public class HelloController {
     @GetMapping(path = "/hello") // method 레벨에 request mapping을 지정하면, 타입 레벨의 request mapping은 무시된다.
     // @ResponseBody // 이걸 붙이면, return 값이 response body로 처리된다.
     public String hello(@RequestParam(value = "name") String name) {
+
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
         return helloService.sayHello(Objects.requireNonNull(name));
     }
 }
