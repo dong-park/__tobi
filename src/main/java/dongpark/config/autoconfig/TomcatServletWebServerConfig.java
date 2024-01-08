@@ -1,4 +1,4 @@
-package dongpark.helloboot.config.autoconfig;
+package dongpark.config.autoconfig;
 
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;

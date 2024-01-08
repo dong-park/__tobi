@@ -1,6 +1,6 @@
 package dongpark.helloboot;
 
-import dongpark.helloboot.config.MySpringBootAnnotation;
+import dongpark.config.MySpringBootAnnotation;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootAnnotation

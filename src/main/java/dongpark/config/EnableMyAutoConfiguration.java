@@ -1,4 +1,4 @@
-package dongpark.helloboot.config;
+package dongpark.config;
 
 import org.springframework.context.annotation.Import;
 
