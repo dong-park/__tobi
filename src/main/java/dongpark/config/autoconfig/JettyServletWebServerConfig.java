@@ -2,6 +2,7 @@ package dongpark.config.autoconfig;
 
 import dongpark.config.ConditionalMyOnClass;
 import dongpark.config.MyAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.util.ClassUtils;
 public class JettyServletWebServerConfig {
 
     @Bean("jettyServerFactory")
+    @ConditionalOnMissingBean
     public ServletWebServerFactory serverFactory() {
         return new JettyServletWebServerFactory();
     }
