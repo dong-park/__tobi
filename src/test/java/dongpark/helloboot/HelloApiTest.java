@@ -25,7 +25,7 @@ public class HelloApiTest {
         TestRestTemplate rest = new TestRestTemplate();
 
         ResponseEntity<String> response =
-                rest.getForEntity("http://localhost:8080/hello?name={name}", String.class, "dongpark");
+                rest.getForEntity("http://localhost:8080/app/hello?name={name}", String.class, "dongpark");
 
         // status code 확인
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -40,7 +40,7 @@ public class HelloApiTest {
         TestRestTemplate rest = new TestRestTemplate();
 
         ResponseEntity<String> response =
-                rest.getForEntity("http://localhost:8080/hello", String.class, "");
+                rest.getForEntity("http://localhost:8080/app/hello", String.class, "");
         // status code 확인
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
@@ -50,7 +50,7 @@ public class HelloApiTest {
         TestRestTemplate rest = new TestRestTemplate();
 
         ResponseEntity<String> response =
-                rest.getForEntity("http://localhost:8080/hello?name=", String.class, "");
+                rest.getForEntity("http://localhost:8080/app/hello?name=", String.class, "");
         // status code 확인
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }

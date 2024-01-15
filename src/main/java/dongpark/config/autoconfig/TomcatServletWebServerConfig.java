@@ -7,6 +7,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.core.env.Environment;
 
 @MyAutoConfiguration
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
@@ -14,7 +15,9 @@ public class TomcatServletWebServerConfig {
 
     @Bean("tomcatServerFactory")
     @ConditionalOnMissingBean
-    public ServletWebServerFactory serverFactory() {
-        return new TomcatServletWebServerFactory();
+    public ServletWebServerFactory serverFactory(Environment env) {
+        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+        factory.setContextPath(env.getProperty("contextPath", "/app"));
+        return factory;
     }
 }
