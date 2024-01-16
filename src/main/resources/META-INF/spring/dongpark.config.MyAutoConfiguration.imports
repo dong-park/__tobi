@@ -1,3 +1,4 @@
+dongpark.config.autoconfig.ServerPropertiesConfig
 dongpark.config.autoconfig.PropertyPlaceholderConfig
 dongpark.config.autoconfig.DispatcherServletConfig
 dongpark.config.autoconfig.TomcatServletWebServerConfig
