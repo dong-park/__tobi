@@ -2,22 +2,25 @@ package dongpark.config.autoconfig;
 
 import dongpark.config.ConditionalMyOnClass;
 import dongpark.config.MyAutoConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.core.env.Environment;
 
 @MyAutoConfiguration
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
 public class TomcatServletWebServerConfig {
 
+    @Value("${contextPath}")
+    String contextPath;
+
+
     @Bean("tomcatServerFactory")
     @ConditionalOnMissingBean
-    public ServletWebServerFactory serverFactory(Environment env) {
+    public ServletWebServerFactory serverFactory() {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-        factory.setContextPath(env.getProperty("contextPath", "/app"));
+        factory.setContextPath(this.contextPath);
         return factory;
     }
 }
