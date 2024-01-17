@@ -1,4 +1,4 @@
-package dongpark.config.autoconfig;
+package dongpark.config.autoconfig.server;
 
 import dongpark.config.MyAutoConfiguration;
 import org.springframework.context.annotation.Bean;

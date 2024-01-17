@@ -1,4 +1,4 @@
-package dongpark.config.autoconfig;
+package dongpark.config.autoconfig.server;
 
 import dongpark.config.MyConfigurationProperties;
 import org.springframework.stereotype.Component;

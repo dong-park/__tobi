@@ -1,4 +1,4 @@
-package dongpark.config.autoconfig;
+package dongpark.config.autoconfig.server;
 
 import dongpark.config.ConditionalMyOnClass;
 import dongpark.config.MyAutoConfiguration;

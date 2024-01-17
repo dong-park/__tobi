@@ -1,5 +1,6 @@
-dongpark.config.autoconfig.PropertyPostProcessorConfig
-dongpark.config.autoconfig.PropertyPlaceholderConfig
-dongpark.config.autoconfig.DispatcherServletConfig
-dongpark.config.autoconfig.TomcatServletWebServerConfig
-dongpark.config.autoconfig.JettyServletWebServerConfig
+dongpark.config.autoconfig.data.DataSourceConfig
+dongpark.config.autoconfig.binding.PropertyPostProcessorConfig
+dongpark.config.autoconfig.binding.PropertyPlaceholderConfig
+dongpark.config.autoconfig.server.DispatcherServletConfig
+dongpark.config.autoconfig.server.TomcatServletWebServerConfig
+dongpark.config.autoconfig.server.JettyServletWebServerConfig
