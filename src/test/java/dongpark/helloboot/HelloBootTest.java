@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 @Target({java.lang.annotation.ElementType.TYPE})
 // @ExtendWith는 JUnit5에서 제공하는 어노테이션으로, 테스트 확장팩을 등록할 때 사용한다.
+// 여기서 SpringExtension.class의 역할은 스프링 테스트 컨텍스트 프레임워크의 확장팩을 등록하는 것이다.
 @ExtendWith(SpringExtension.class)
 // @ContextConfiguration은 테스트에 사용할 ApplicationContext를 설정한다.
 @ContextConfiguration(classes = HellobootApplication.class)
