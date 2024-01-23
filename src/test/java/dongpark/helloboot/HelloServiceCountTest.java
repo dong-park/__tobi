@@ -3,8 +3,11 @@ package dongpark.helloboot;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-@HelloBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@Transactional
 public class HelloServiceCountTest {
 
     @Autowired HelloService helloService;
@@ -12,8 +15,8 @@ public class HelloServiceCountTest {
 
     @Test
     void sayHelloIncrementsCount() {
-        helloRepository.increaseCount("bob");
-        Assertions.assertThat(helloRepository.countOf("bob")).isEqualTo(1);
+        helloRepository.increaseCount("dongpark");
+        Assertions.assertThat(helloRepository.countOf("dongpark")).isEqualTo(1);
     }
 
 }

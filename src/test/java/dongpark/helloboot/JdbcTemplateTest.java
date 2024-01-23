@@ -3,11 +3,12 @@ package dongpark.helloboot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@HelloBootTest
+@JdbcTest
 public class JdbcTemplateTest {
 
     @Autowired
@@ -22,7 +23,7 @@ public class JdbcTemplateTest {
     @Test
     void insert() {
         jdbcTemplate.update("INSERT INTO hello values (?, ?)", "dongpark", 1);
-        jdbcTemplate.update("INSERT INTO hello values (?, ?)", "spring", 2);
+        jdbcTemplate.update("INSERT INTO hello values (?, ?)", "spring", 3);
 
         Long count = jdbcTemplate.queryForObject("SELECT count(*) FROM hello", Long.class);
         assertThat(count).isEqualTo(2);
@@ -31,7 +32,7 @@ public class JdbcTemplateTest {
     @Test
     void insert2() {
         jdbcTemplate.update("INSERT INTO hello values (?, ?)", "dongpark", 1);
-        jdbcTemplate.update("INSERT INTO hello values (?, ?)", "spring", 2);
+        jdbcTemplate.update("INSERT INTO hello values (?, ?)", "spring", 3);
 
         Long count = jdbcTemplate.queryForObject("SELECT count(*) FROM hello", Long.class);
         assertThat(count).isEqualTo(2);
